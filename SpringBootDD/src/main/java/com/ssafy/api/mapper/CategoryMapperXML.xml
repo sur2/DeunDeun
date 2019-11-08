@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssafy.api.mapper.CategoryMapper">
+	<select id="selectCategoryById" parameterType="Category" resultType="Category">
+		SELECT * FROM CATEGORY WHERE CATEGORY_ID=#{category_id};
+	</select>
+	
+	<select id="selectAllCategory" resultType="Category">
+		SELECT * FROM CATEGORY;	
+	</select>
+	
+	<insert id="insertCategory" parameterType="Category">
+		INSERT INTO CATEGORY(CATEGORY_ID,NAME) VALUES(#{category_id},#{name});
+	</insert>
+	
+	<update id="updateCategory" parameterType="Category">
+		UPDATE CATEGORY SET NAME=#{name} WHERE CATEGORY_ID=#{category_id}; 
+	</update>
+	
+</mapper>

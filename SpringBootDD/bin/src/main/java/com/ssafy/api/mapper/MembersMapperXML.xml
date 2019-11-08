@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssafy.api.mapper.NoticeMapper">
+
+	<select id="selectAllNotice" resultType="Notice">
+		SELECT * FROM NOTICE;
+	</select>
+	
+	<select id="selectNoticeById" parameterType="int" resultType="Notice">
+		SELECT * FROM NOTICE
+		WHERE NOTICE_ID = #{notice_id};
+	</select>
+
+	<select id="selectNoticeByMember_id" parameterType="int" resultType="Notice">
+		SELECT * FROM NOTICE
+		WHERE MEMBER_ID = #{member_id};
+	</select>
+	
+	<insert id="insertNotice" parameterType="Notice">
+		INSERT INTO NOTICE(MEMBER_ID, CONTENTS)
+		VALUES(#{member_id}, #{contents});
+	</insert>
+	
+	<update id="updateNotice" parameterType="Notice">
+		UPDATE NOTICE
+		SET
+		CONTENTS = #{contents},
+		WHERE NOTICE_ID = #{notice_id};
+	</update>
+	
+	<delete id="deleteNotice" parameterType="int">
+		DELETE FROM NOTICE WHERE NOTICE_ID = #{notice_id};
+	</delete>
+
+</mapper>

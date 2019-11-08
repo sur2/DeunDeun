@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssafy.api.mapper.RestaurantMapper">
+	<insert id="insertOne" parameterType="Restaurant">
+		INSERT INTO RESTAURANT(RESTAURANT_ID,NAME,COMPANY_NAME,OPERATION_HOUT,TEL,LOCATION_X,LOCATION_Y)
+		VALUES(#{restaurant_id},#{name},#{company_name},#{operation_hour},#{tel},#{location_x},#{location_y})
+	</insert>
+	<select id="selectOneById" parameterType="int" resultType="Restaurant">
+		SELECT * FROM RESTAURANT WHERE RESTAURANT_ID=#{restaurant_id};
+	</select>
+	<select id="selectOneByName" parameterType="String" resultType="Restaurant">
+		SELECT * FROM RESTAURANT WHERE NAME=#{name};
+	</select>
+	<select id="selectAll" resultType="Restaurant">
+		SELECT * FROM RESTAURANT;
+	</select>
+	<update id="updateRestaurantById">
+		UPDATE RESTAURANT SET TEL=#{tel} WHERE RESTAURANT_ID=#{restaurant_id};  
+	</update>
+	<delete id="deleteOneById" parameterType="int">
+		DELETE FROM RESTAURANT WHERE RESTAURANT_ID=#{restaurant_id};
+	</delete>
+	<select id="selectLowestPrice" resultType="Restaurant">
+		select r.*, f.price 
+		from restaurant as r 
+		inner join (
+			select restaurant_id ,min(price) as price 
+			from food 
+			where popular_menu = 1 
+			group by restaurant_id
+			) as f 
+		on r.restaurant_id = f.restaurant_id;
+	</select>
+	
+</mapper>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssafy.api.mapper.ReplyMapper">
+	<select id="selectReplyById" parameterType="int" resultType="Reply">
+		SELECT * FROM REPLY WHERE REPLY_ID=#{reply_id};
+	</select>
+	
+	<select id="selectReplyByMemberId" parameterType="int" resultType="Reply">
+		SELECT * FROM REPLY WHERE MEMBER_ID=#{member_id};
+	</select>
+	
+	<select id="selectAllReply" resultType="Reply">
+		SELECT * FROM REPLY;	
+	</select>
+	
+	<insert id="insertReply" parameterType="Reply">
+		INSERT INTO REPLY(QNA_ID,MEMBER_ID,CONTENTS) VALUES(#{qna_id},#{member_id},#{contents});
+	</insert>
+
+	<update id="updateReply" parameterType="Reply">
+		UPDATE REPLY SET CONTENTS=#{contents} WHERE REPLY_ID=#{reply_id};	
+	</update>
+	
+	<delete id="deleteReply" parameterType="int">
+		DELETE FROM REPLY WHERE REPLY_ID=#{reply_id};
+	</delete>
+</mapper>

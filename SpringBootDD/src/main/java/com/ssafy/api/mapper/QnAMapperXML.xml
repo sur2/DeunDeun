@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssafy.api.mapper.QnAMapper">
+	<select id="selectQnAById" parameterType="int" resultType="QnA">
+		SELECT * FROM QNA WHERE QNA_ID=#{qna_id};
+	</select>
+	
+	<select id="selectQnAByMemberId" parameterType="int" resultType="QnA">
+		SELECT * FROM QNA WHERE MEMBER_ID=#{member_id};
+	</select>
+	
+	<select id="selectAllQnA" resultType="QnA">
+		SELECT * FROM QNA;
+	</select>
+	
+	<insert id="insertQnA" parameterType="QnA">
+		INSERT INTO QNA(MEMBER_ID,CONTENTS) VALUES(#{member_id},#{contents});
+	</insert>
+
+	<update id="updateQnA" parameterType="QnA">
+		UPDATE QNA SET CONTENTS=#{contents} WHERE QNA_ID=#{qna_id};
+	</update>
+	
+	<delete id="deleteQnA" parameterType="int">
+		DELETE FROM QNA WHERE QNA_ID=#{qna_id};
+	</delete>
+	
+	
+</mapper>
